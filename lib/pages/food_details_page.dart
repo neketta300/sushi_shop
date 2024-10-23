@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:sushi_shop/components/button.dart';
+import 'package:provider/provider.dart';
+import 'package:sushi_shop/components/alert_button.dart';
+import 'package:sushi_shop/components/primaty_button.dart';
+import 'package:sushi_shop/main.dart';
 import 'package:sushi_shop/models/food.dart';
+import 'package:sushi_shop/models/shop.dart';
 import 'package:sushi_shop/theme/colors.dart';
 
 class FoodDetailsPage extends StatefulWidget {
@@ -34,7 +38,44 @@ class _FoodDetailsPageState extends State<FoodDetailsPage> {
     }
   }
 
-  void addToCard() {}
+  void addToCard() {
+    // only add to cart if there is something in the cart
+    if (quantityCount > 0) {
+      // get access to shop
+      final shop = context.read<Shop>();
+      // add to cart
+      shop.addToCart(widget.food, quantityCount);
+      // let the user know it was successfull
+      showDialog(
+        context: context,
+        barrierDismissible:
+            false, // cant do click anywhere to leave from dialog box
+        builder: (context) => AlertDialog(
+          backgroundColor: primaryColor,
+          content: const Text(
+            "Succesfully added to cart!",
+            style: TextStyle(
+              color: Colors.white,
+              fontSize: 16,
+            ),
+            textAlign: TextAlign.center,
+          ),
+          actions: [
+            Center(
+              child: MyAlertButton(
+                  text: "Submit",
+                  onTap: () {
+                    // pop once to remove dialog box
+                    Navigator.pop(context);
+                    // pop again to go previous screen
+                    Navigator.pop(context);
+                  }),
+            )
+          ],
+        ),
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -193,7 +234,7 @@ class _FoodDetailsPageState extends State<FoodDetailsPage> {
                 ),
 
                 // add to cart button
-                MyButton(text: "Add to Cart", onTap: addToCard)
+                MyPrimaryButton(text: "Add to Cart", onTap: addToCard)
               ],
             ),
           )

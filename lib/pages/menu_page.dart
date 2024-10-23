@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:sushi_shop/components/button.dart';
+import 'package:provider/provider.dart';
+import 'package:sushi_shop/components/primaty_button.dart';
 import 'package:sushi_shop/components/food_tile.dart';
-import 'package:sushi_shop/models/food.dart';
+import 'package:sushi_shop/models/shop.dart';
 import 'package:sushi_shop/pages/food_details_page.dart';
 import 'package:sushi_shop/resources/resources.dart';
 import 'package:sushi_shop/theme/colors.dart';
@@ -15,22 +16,12 @@ class MenuPageWidget extends StatefulWidget {
 }
 
 class _MenuPageWidgetState extends State<MenuPageWidget> {
-  //food menu
-  List foodMenu = [
-    Food(
-        name: "Salmon Sushi",
-        price: "21.00",
-        image: Images.philadelphmeiSushi,
-        rating: "4.9"),
-    Food(
-        name: "Canviar Sushi",
-        price: "49.00",
-        image: Images.threeCaviarSushi,
-        rating: "4.7"),
-  ];
-
   // navigate to food item details page
   void navigateToFoodDetails(int index) {
+    //get the shop and its menu
+    final shop = context.read<Shop>();
+    final foodMenu = shop.foodMenu;
+
     Navigator.push(
         context,
         MaterialPageRoute(
@@ -42,6 +33,9 @@ class _MenuPageWidgetState extends State<MenuPageWidget> {
 
   @override
   Widget build(BuildContext context) {
+    //get the shop and its menu
+    final shop = context.read<Shop>();
+    final foodMenu = shop.foodMenu;
     return Scaffold(
       backgroundColor: backGroungColor /*Colors.grey[300]*/,
       appBar: AppBar(
@@ -58,6 +52,14 @@ class _MenuPageWidgetState extends State<MenuPageWidget> {
             color: Colors.grey[900],
           ),
         ),
+        actions: [
+          // cart button
+          IconButton(
+              onPressed: () {
+                Navigator.pushNamed(context, '/cartpage');
+              },
+              icon: const Icon(Icons.shopping_cart))
+        ],
       ),
       body: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
         // promo banner
@@ -81,7 +83,7 @@ class _MenuPageWidgetState extends State<MenuPageWidget> {
                     height: 20,
                   ),
                   // redeem button
-                  MyButton(text: 'Reddem', onTap: () {}),
+                  MyPrimaryButton(text: 'Reddem', onTap: () {}),
                 ],
               ),
               Image.asset(

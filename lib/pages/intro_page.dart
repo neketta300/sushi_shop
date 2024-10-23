@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:sushi_shop/components/button.dart';
+import 'package:sushi_shop/components/primaty_button.dart';
 import 'package:sushi_shop/resources/resources.dart';
 import 'package:sushi_shop/theme/colors.dart';
 
@@ -66,7 +66,7 @@ class IntroPageWidget extends StatelessWidget {
 
             //button
 
-            MyButton(
+            MyPrimaryButton(
               text: "Get started",
               onTap: () {
                 Navigator.pushNamed(
