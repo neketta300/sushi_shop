@@ -3,7 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:sushi_shop/components/alert_button.dart';
 import 'package:sushi_shop/components/primaty_button.dart';
-import 'package:sushi_shop/main.dart';
+
 import 'package:sushi_shop/models/food.dart';
 import 'package:sushi_shop/models/shop.dart';
 import 'package:sushi_shop/theme/colors.dart';

@@ -39,6 +39,7 @@ class _MenuPageWidgetState extends State<MenuPageWidget> {
     return Scaffold(
       backgroundColor: backGroungColor /*Colors.grey[300]*/,
       appBar: AppBar(
+        foregroundColor: Colors.grey[900],
         centerTitle: true,
         backgroundColor: Colors.transparent,
         elevation: 0,
@@ -46,11 +47,8 @@ class _MenuPageWidgetState extends State<MenuPageWidget> {
           Icons.menu,
           color: Colors.grey[900],
         ),
-        title: Text(
+        title: const Text(
           'Room',
-          style: TextStyle(
-            color: Colors.grey[900],
-          ),
         ),
         actions: [
           // cart button

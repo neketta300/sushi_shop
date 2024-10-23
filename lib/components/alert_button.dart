@@ -17,7 +17,7 @@ class MyAlertButton extends StatelessWidget {
       child: Container(
         width: 150,
         decoration: BoxDecoration(
-          color: const Color.fromARGB(255, 196, 98, 114),
+          color: const Color.fromARGB(255, 108, 48, 60),
           borderRadius: BorderRadius.circular(20),
         ),
         child: Padding(
