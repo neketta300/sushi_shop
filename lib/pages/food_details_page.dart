@@ -18,16 +18,20 @@ class _FoodDetailsPageState extends State<FoodDetailsPage> {
 
   // decrement quantity
   void decrementQuantity() {
-    setState(() {
-      quantityCount--;
-    });
+    if (quantityCount > 0) {
+      setState(() {
+        quantityCount--;
+      });
+    }
   }
 
   // increment quantity
   void incrementQuantity() {
-    setState(() {
-      quantityCount++;
-    });
+    if (quantityCount < 100) {
+      setState(() {
+        quantityCount++;
+      });
+    }
   }
 
   void addToCard() {}
