@@ -33,6 +33,7 @@ class MyButton extends StatelessWidget {
               const SizedBox(
                 width: 10,
               ),
+
               //icon
               const Icon(
                 Icons.arrow_forward,
