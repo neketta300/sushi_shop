@@ -1,7 +1,9 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:sushi_shop/components/login_button.dart';
 import 'package:sushi_shop/components/my_textfield.dart';
+import 'package:sushi_shop/helper/helper_function.dart';
 import 'package:sushi_shop/pages/menu_page.dart';
 import 'package:sushi_shop/theme/colors.dart';
 
@@ -19,15 +21,26 @@ class _LoginPageState extends State<LoginPage> {
 
   final TextEditingController passwordController = TextEditingController();
 
-  void login() {
-    /*
+  void login() async {
+    showDialog(
+      context: context,
+      builder: (context) => const Center(
+        child: CircularProgressIndicator(),
+      ),
+    );
 
+    // try to sign in
+    try {
+      await FirebaseAuth.instance.signInWithEmailAndPassword(
+          email: emailController.text, password: passwordController.text);
 
-
-
-
-    */
-
+      // pop loading circle
+      if (context.mounted) Navigator.pop(context);
+    } on FirebaseException catch (e) {
+      // pop loading circle
+      Navigator.pop(context);
+      displayMessageToUser(e.code, context);
+    }
     // navigate to home page
     Navigator.push(context,
         MaterialPageRoute(builder: (context) => const MenuPageWidget()));

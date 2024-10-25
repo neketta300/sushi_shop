@@ -1,7 +1,9 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:sushi_shop/components/login_button.dart';
 import 'package:sushi_shop/components/my_textfield.dart';
+import 'package:sushi_shop/helper/helper_function.dart';
 import 'package:sushi_shop/theme/colors.dart';
 
 class RegisterPage extends StatefulWidget {
@@ -14,9 +16,45 @@ class RegisterPage extends StatefulWidget {
 
 class _RegisterPageState extends State<RegisterPage> {
   final TextEditingController emailController = TextEditingController();
+  final TextEditingController nicknameController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
   final TextEditingController cofnrimPasswordController =
       TextEditingController();
+
+  void registerUser() async {
+    // show loadging circle
+    showDialog(
+      context: context,
+      builder: (context) => const Center(
+        child: CircularProgressIndicator(),
+      ),
+    );
+    // make sure passsword ,atch
+    if (passwordController.text != cofnrimPasswordController.text) {
+      // pop loading circle
+      Navigator.pop(context);
+      // show error msg
+      displayMessageToUser("Passwords don't match!", context);
+    } else {
+      // try creating the users
+      try {
+        //create the user
+        UserCredential? userCredential =
+            await FirebaseAuth.instance.createUserWithEmailAndPassword(
+          email: emailController.text,
+          password: passwordController.text,
+        );
+
+        // pop loading circle
+        Navigator.pop(context);
+      } on FirebaseAuthException catch (e) {
+        // pop loading circle
+        Navigator.pop(context);
+        // display error msg to user
+        displayMessageToUser(e.code, context);
+      }
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -48,6 +86,17 @@ class _RegisterPageState extends State<RegisterPage> {
           const SizedBox(
             height: 25,
           ),
+
+          // nickname textfield
+          MyTextfield(
+            controller: nicknameController,
+            hintText: "Nickname",
+            obscurreText: false,
+          ),
+
+          const SizedBox(
+            height: 10,
+          ),
           // email textfield
           MyTextfield(
             controller: emailController,
@@ -78,7 +127,7 @@ class _RegisterPageState extends State<RegisterPage> {
             height: 10,
           ),
           // sign up button
-          LoginButton(text: "Sign up", onTap: () {}),
+          LoginButton(text: "Sign up", onTap: registerUser),
 
           const SizedBox(
             height: 25,

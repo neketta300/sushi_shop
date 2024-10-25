@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:sushi_shop/theme/colors.dart';
 
 class MyTextfield extends StatelessWidget {
   final TextEditingController controller;
@@ -29,7 +28,7 @@ class MyTextfield extends StatelessWidget {
           ),
           hintText: hintText,
           hintStyle: GoogleFonts.dmSerifDisplay(
-              color: Color.fromARGB(192, 186, 147, 156)),
+              color: const Color.fromARGB(192, 186, 147, 156)),
         ),
       ),
     );

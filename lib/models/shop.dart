@@ -19,12 +19,28 @@ class Shop extends ChangeNotifier {
     ),
   ];
 
+  final List<Food> _popularFoodMenu = [
+    Food(
+      name: "Maki",
+      price: "23.00",
+      image: Images.maki,
+      rating: "5.0",
+    ),
+    Food(
+      name: "Philadelphmei Sushi",
+      price: "49.00",
+      image: Images.threePhiladelphmeiSushi,
+      rating: "4.7",
+    ),
+  ];
+
   // customer cart
   List<Food> _cart = [];
 
   //getter methods
   List<Food> get foodMenu => _foodMenu;
   List<Food> get cart => _cart;
+  List<Food> get popularFoodMenu => _popularFoodMenu;
 
   // add to cart
   void addToCart(Food foodItem, int quantity) {
