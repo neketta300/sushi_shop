@@ -53,7 +53,7 @@ class IntroPageWidget extends StatelessWidget {
             //subtitle
 
             Text(
-              "Try the most popular dishes from 'At Romchik's', cooked with love in the best kazarma. Natural ingredients only!",
+              "Try the most popular dishes from 'At Romchik's', cooked with love in the best kazarma. Natural ingredients only! Maked by n3hcorp",
               style: TextStyle(
                 color: Colors.grey[300],
                 height: 2,
@@ -71,7 +71,7 @@ class IntroPageWidget extends StatelessWidget {
               onTap: () {
                 Navigator.pushNamed(
                   context,
-                  '/menupage',
+                  '/loginorregistation',
                 );
               },
             )

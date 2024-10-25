@@ -23,12 +23,13 @@ class _MenuPageWidgetState extends State<MenuPageWidget> {
     final foodMenu = shop.foodMenu;
 
     Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => FoodDetailsPage(
-            food: foodMenu[index],
-          ),
-        ));
+      context,
+      MaterialPageRoute(
+        builder: (context) => FoodDetailsPage(
+          food: foodMenu[index],
+        ),
+      ),
+    );
   }
 
   @override
@@ -43,10 +44,10 @@ class _MenuPageWidgetState extends State<MenuPageWidget> {
         centerTitle: true,
         backgroundColor: Colors.transparent,
         elevation: 0,
-        leading: Icon(
-          Icons.menu,
-          color: Colors.grey[900],
-        ),
+        // leading: Icon(
+        //   Icons.menu,
+        //   color: Colors.grey[900],
+        // ),
         title: const Text(
           'Room',
         ),
