@@ -17,33 +17,45 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   // text editing controllers
-  final TextEditingController emailController = TextEditingController();
+  final TextEditingController emailController =
+      TextEditingController(text: 'trihana@gmail.com');
 
-  final TextEditingController passwordController = TextEditingController();
+  final TextEditingController passwordController =
+      TextEditingController(text: '123456');
 
   void login() async {
     showDialog(
       context: context,
-      builder: (context) => const Center(
-        child: CircularProgressIndicator(),
+      builder: (context) => Center(
+        child: CircularProgressIndicator(
+          color: primaryColor,
+        ),
       ),
     );
 
     // try to sign in
     try {
       await FirebaseAuth.instance.signInWithEmailAndPassword(
-          email: emailController.text, password: passwordController.text);
+        email: emailController.text,
+        password: passwordController.text,
+      );
 
       // pop loading circle
       if (context.mounted) Navigator.pop(context);
+
+      // navigate to home page only if login is successful
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => const MenuPageWidget()),
+      );
     } on FirebaseException catch (e) {
       // pop loading circle
       Navigator.pop(context);
-      displayMessageToUser(e.code, context);
+      displayMessageToUser(
+        e.code,
+        context,
+      );
     }
-    // navigate to home page
-    Navigator.push(context,
-        MaterialPageRoute(builder: (context) => const MenuPageWidget()));
   }
 
   @override

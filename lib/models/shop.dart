@@ -34,10 +34,13 @@ class Shop extends ChangeNotifier {
     ),
   ];
 
+  final Food _promoFood = Food(
+      name: 'Green Maki', price: '37.00', image: Images.twoMaki, rating: '4.1');
   // customer cart
   List<Food> _cart = [];
 
   //getter methods
+  Food get promoFood => _promoFood;
   List<Food> get foodMenu => _foodMenu;
   List<Food> get cart => _cart;
   List<Food> get popularFoodMenu => _popularFoodMenu;

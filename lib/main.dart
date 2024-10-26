@@ -9,6 +9,7 @@ import 'package:sushi_shop/pages/cart_page.dart';
 import 'package:sushi_shop/pages/intro_page.dart';
 
 import 'package:sushi_shop/pages/menu_page.dart';
+import 'package:sushi_shop/theme/colors.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -27,6 +28,12 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      theme: ThemeData(
+        textSelectionTheme: TextSelectionThemeData(
+            cursorColor: const Color.fromARGB(255, 106, 106, 106),
+            selectionColor: secondryColor,
+            selectionHandleColor: const Color.fromARGB(255, 219, 219, 219)),
+      ),
       debugShowCheckedModeBanner: false,
       home: const IntroPageWidget(),
       //home: IntroPageWidget(),

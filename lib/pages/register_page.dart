@@ -27,8 +27,10 @@ class _RegisterPageState extends State<RegisterPage> {
     // show loadging circle
     showDialog(
       context: context,
-      builder: (context) => const Center(
-        child: CircularProgressIndicator(),
+      builder: (context) => Center(
+        child: CircularProgressIndicator(
+          color: primaryColor,
+        ),
       ),
     );
     final password = passwordController.text;

@@ -8,6 +8,8 @@ import 'package:sushi_shop/pages/food_details_page.dart';
 import 'package:sushi_shop/resources/resources.dart';
 import 'package:sushi_shop/theme/colors.dart';
 
+enum TypeMenu { foodMenu, popularFood, promoFood }
+
 class MenuPageWidget extends StatefulWidget {
   const MenuPageWidget({super.key});
 
@@ -17,19 +19,40 @@ class MenuPageWidget extends StatefulWidget {
 
 class _MenuPageWidgetState extends State<MenuPageWidget> {
   // navigate to food item details page
-  void navigateToFoodDetails(int index) {
+  void navigateToFoodDetails(int index, TypeMenu menu) {
     //get the shop and its menu
     final shop = context.read<Shop>();
-    final foodMenu = shop.foodMenu;
-
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => FoodDetailsPage(
-          food: foodMenu[index],
+    if (menu == TypeMenu.foodMenu) {
+      final foodMenu = shop.foodMenu;
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => FoodDetailsPage(
+            food: foodMenu[index],
+          ),
         ),
-      ),
-    );
+      );
+    } else if (menu == TypeMenu.popularFood) {
+      final popularFoodMenu = shop.popularFoodMenu;
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => FoodDetailsPage(
+            food: popularFoodMenu[index],
+          ),
+        ),
+      );
+    } else if (menu == TypeMenu.promoFood) {
+      final promoFood = shop.promoFood;
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => FoodDetailsPage(
+            food: promoFood,
+          ),
+        ),
+      );
+    }
   }
 
   @override
@@ -37,6 +60,8 @@ class _MenuPageWidgetState extends State<MenuPageWidget> {
     //get the shop and its menu
     final shop = context.read<Shop>();
     final foodMenu = shop.foodMenu;
+    final popularFood = shop.popularFoodMenu;
+    final promoFood = shop.promoFood;
     return Scaffold(
       backgroundColor: backGroungColor /*Colors.grey[300]*/,
       appBar: AppBar(
@@ -52,7 +77,7 @@ class _MenuPageWidgetState extends State<MenuPageWidget> {
           'Room',
         ),
         actions: [
-          // cart button
+          // cart buttonx
           IconButton(
               onPressed: () {
                 Navigator.pushNamed(context, '/cartpage');
@@ -60,165 +85,188 @@ class _MenuPageWidgetState extends State<MenuPageWidget> {
               icon: const Icon(Icons.shopping_cart))
         ],
       ),
-      body: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-        // promo banner
-        Container(
-          margin: const EdgeInsets.symmetric(horizontal: 25),
-          padding: const EdgeInsets.symmetric(vertical: 25, horizontal: 30),
-          decoration: BoxDecoration(
-              color: primaryColor, borderRadius: BorderRadius.circular(20)),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Column(
-                children: [
-                  Text(
-                    // promo message
-                    'Get 32% promo',
-                    style: GoogleFonts.dmSerifDisplay(
-                        fontSize: 20, color: Colors.white),
-                  ),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  // redeem button
-                  MyPrimaryButton(text: 'Reddem', onTap: () {}),
-                ],
-              ),
-              Image.asset(
-                Images.threePhiladelphmeiSushi,
-                height: 100,
-              )
-            ],
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          // promo banner
+          Container(
+            margin: const EdgeInsets.symmetric(horizontal: 25),
+            padding: const EdgeInsets.symmetric(vertical: 25, horizontal: 30),
+            decoration: BoxDecoration(
+                color: primaryColor, borderRadius: BorderRadius.circular(20)),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Column(
+                  children: [
+                    Text(
+                      // promo message
+                      'Get 32% promo',
+                      style: GoogleFonts.dmSerifDisplay(
+                          fontSize: 20, color: Colors.white),
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    // redeem button
+                    MyPrimaryButton(
+                        text: 'Reddem',
+                        onTap: () =>
+                            navigateToFoodDetails(0, TypeMenu.promoFood)),
+                  ],
+                ),
+                Image.asset(
+                  promoFood.image,
+                  height: 100,
+                )
+              ],
+            ),
           ),
-        ),
-        const SizedBox(
-          height: 25,
-        ),
-        // serch bar
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 25),
-          child: TextField(
-            decoration: InputDecoration(
-              enabledBorder: OutlineInputBorder(
-                borderSide: const BorderSide(color: Colors.white),
-                borderRadius: BorderRadius.circular(20),
-              ),
-              hintText: "Search here..",
-              focusedBorder: OutlineInputBorder(
-                borderSide: const BorderSide(color: Colors.white),
-                borderRadius: BorderRadius.circular(20),
+          const SizedBox(
+            height: 25,
+          ),
+          // serch bar
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 25),
+            child: TextField(
+              decoration: InputDecoration(
+                enabledBorder: OutlineInputBorder(
+                  borderSide: const BorderSide(color: Colors.white),
+                  borderRadius: BorderRadius.circular(20),
+                ),
+                hintText: "Search here..",
+                focusedBorder: OutlineInputBorder(
+                  borderSide: const BorderSide(color: Colors.white),
+                  borderRadius: BorderRadius.circular(20),
+                ),
               ),
             ),
           ),
-        ),
 
-        const SizedBox(
-          height: 25,
-        ),
-
-        // meenu list
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 25),
-          child: Text(
-            'Food menu',
-            style: TextStyle(
-                color: Colors.grey[800],
-                fontSize: 18,
-                fontWeight: FontWeight.bold),
+          const SizedBox(
+            height: 25,
           ),
-        ),
 
-        const SizedBox(
-          height: 10,
-        ),
-
-        Expanded(
-          child: ListView.builder(
-            scrollDirection: Axis.horizontal,
-            itemCount: foodMenu.length,
-            itemBuilder: (context, index) => FoodMenuTile(
-              food: foodMenu[index],
-              onTap: () => navigateToFoodDetails(index),
+          // meenu list
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 25),
+            child: Text(
+              'Food menu',
+              style: TextStyle(
+                  color: Colors.grey[800],
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold),
             ),
           ),
-        ),
 
-        const SizedBox(
-          height: 25,
-        ),
-
-        // popular food
-
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 25),
-          child: Text(
-            'Popular food',
-            style: TextStyle(
-                color: Colors.grey[800],
-                fontSize: 18,
-                fontWeight: FontWeight.bold),
+          const SizedBox(
+            height: 10,
           ),
-        ),
 
-        const SizedBox(
-          height: 10,
-        ),
-
-        Container(
-          decoration: BoxDecoration(
-            color: foodTileColor /*Colors.grey[100]*/,
-            borderRadius: BorderRadius.circular(20),
-          ),
-          margin: const EdgeInsets.only(left: 25, right: 25, bottom: 25),
-          padding: const EdgeInsets.all(20),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              // image
-              Row(
-                children: [
-                  Image.asset(
-                    Images.maki,
-                    height: 60,
-                  ),
-
-                  const SizedBox(
-                    width: 20,
-                  ),
-                  // name and price
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      // name
-                      Text(
-                        "Maki",
-                        style: GoogleFonts.dmSerifDisplay(fontSize: 18),
-                      ),
-                      const SizedBox(
-                        height: 10,
-                      ),
-
-                      // price
-                      Text(
-                        '\$23.00',
-                        style: TextStyle(
-                          color: Colors.grey[700],
-                        ),
-                      ),
-                    ],
-                  ),
-                ],
+          Expanded(
+            child: ListView.builder(
+              scrollDirection: Axis.horizontal,
+              itemCount: foodMenu.length,
+              itemBuilder: (context, index) => FoodMenuTile(
+                food: foodMenu[index],
+                onTap: () => navigateToFoodDetails(index, TypeMenu.foodMenu),
               ),
-              const Icon(
-                Icons.favorite_outline,
-                color: Colors.grey,
-                size: 28,
-              )
-            ],
+            ),
           ),
-        )
-      ]),
+
+          const SizedBox(
+            height: 25,
+          ),
+
+          // popular food
+
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 25),
+            child: Text(
+              'Popular food',
+              style: TextStyle(
+                  color: Colors.grey[800],
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold),
+            ),
+          ),
+
+          const SizedBox(
+            height: 10,
+          ),
+
+          SizedBox(
+            height:
+                140, // Высота, достаточная для размещения каждого PopularFoodTile
+            child: SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: Row(
+                children: popularFood.map((food) {
+                  return PopularFoodTile(
+                    food: food,
+                    onTap: () => navigateToFoodDetails(
+                        popularFood.indexOf(food), TypeMenu.popularFood),
+                  );
+                }).toList(),
+              ),
+            ),
+          )
+
+          // Container(
+          //   decoration: BoxDecoration(
+          //     color: foodTileColor /*Colors.grey[100]*/,
+          //     borderRadius: BorderRadius.circular(20),
+          //   ),
+          //   margin: const EdgeInsets.only(left: 25, right: 25, bottom: 25),
+          //   padding: const EdgeInsets.all(20),
+          //   child: Row(
+          //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          //     children: [
+          //       // image
+          //       Row(
+          //         children: [
+          //           Image.asset(
+          //             Images.maki,
+          //             height: 60,
+          //           ),
+
+          //           const SizedBox(
+          //             width: 20,
+          //           ),
+          //           // name and price
+          //           Column(
+          //             crossAxisAlignment: CrossAxisAlignment.start,
+          //             children: [
+          //               // name
+          //               Text(
+          //                 "Maki",
+          //                 style: GoogleFonts.dmSerifDisplay(fontSize: 18),
+          //               ),
+          //               const SizedBox(
+          //                 height: 10,
+          //               ),
+
+          //               // price
+          //               Text(
+          //                 '\$23.00',
+          //                 style: TextStyle(
+          //                   color: Colors.grey[700],
+          //                 ),
+          //               ),
+          //             ],
+          //           ),
+          //         ],
+          //       ),
+          //       const Icon(
+          //         Icons.favorite_outline,
+          //         color: Colors.grey,
+          //         size: 28,
+          //       )
+          //     ],
+          //   ),
+          // )
+        ],
+      ),
     );
   }
 }
