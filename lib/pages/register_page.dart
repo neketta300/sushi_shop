@@ -1,8 +1,10 @@
+import 'package:ffi/ffi.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:sushi_shop/components/login_button.dart';
 import 'package:sushi_shop/components/my_textfield.dart';
+import 'package:sushi_shop/ffi/native_check_logpas.dart';
 import 'package:sushi_shop/helper/helper_function.dart';
 import 'package:sushi_shop/theme/colors.dart';
 
@@ -29,8 +31,14 @@ class _RegisterPageState extends State<RegisterPage> {
         child: CircularProgressIndicator(),
       ),
     );
+    final password = passwordController.text;
+    final confirmPassword = cofnrimPasswordController.text;
+    final resultOfCppFunc = checkCredentials(
+      password.toNativeUtf8(),
+      confirmPassword.toNativeUtf8(),
+    );
     // make sure passsword ,atch
-    if (passwordController.text != cofnrimPasswordController.text) {
+    if (resultOfCppFunc != 1) {
       // pop loading circle
       Navigator.pop(context);
       // show error msg
@@ -47,6 +55,8 @@ class _RegisterPageState extends State<RegisterPage> {
 
         // pop loading circle
         Navigator.pop(context);
+        // push to menu page
+        Navigator.pushNamed(context, '/menupage');
       } on FirebaseAuthException catch (e) {
         // pop loading circle
         Navigator.pop(context);

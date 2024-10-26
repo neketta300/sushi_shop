@@ -1,0 +1,3 @@
+C:/flutterProject/sushiShop/android/app/.cxx/Debug/b311x1c1/armeabi-v7a/CMakeFiles/native_check_logpas.dir
+C:/flutterProject/sushiShop/android/app/.cxx/Debug/b311x1c1/armeabi-v7a/CMakeFiles/edit_cache.dir
+C:/flutterProject/sushiShop/android/app/.cxx/Debug/b311x1c1/armeabi-v7a/CMakeFiles/rebuild_cache.dir

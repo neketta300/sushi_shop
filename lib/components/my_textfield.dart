@@ -17,6 +17,7 @@ class MyTextfield extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 25.0),
       child: TextField(
+        style: GoogleFonts.dmSerifDisplay(color: Colors.grey[300]),
         controller: controller,
         obscureText: obscurreText,
         decoration: InputDecoration(
