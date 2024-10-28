@@ -69,10 +69,12 @@ class _MenuPageWidgetState extends State<MenuPageWidget> {
         centerTitle: true,
         backgroundColor: Colors.transparent,
         elevation: 0,
-        // leading: Icon(
-        //   Icons.menu,
-        //   color: Colors.grey[900],
-        // ),
+        leading: IconButton(
+          icon: const Icon(Icons.exit_to_app),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
         title: const Text(
           'Room',
         ),
@@ -110,9 +112,9 @@ class _MenuPageWidgetState extends State<MenuPageWidget> {
                     ),
                     // redeem button
                     MyPrimaryButton(
-                        text: 'Reddem',
-                        onTap: () =>
-                            navigateToFoodDetails(0, TypeMenu.promoFood)),
+                      text: 'Reddem',
+                      onTap: () => navigateToFoodDetails(0, TypeMenu.promoFood),
+                    ),
                   ],
                 ),
                 Image.asset(
@@ -196,18 +198,19 @@ class _MenuPageWidgetState extends State<MenuPageWidget> {
           ),
 
           SizedBox(
-            height:
-                140, // Высота, достаточная для размещения каждого PopularFoodTile
+            height: 140,
             child: SingleChildScrollView(
               scrollDirection: Axis.horizontal,
               child: Row(
-                children: popularFood.map((food) {
-                  return PopularFoodTile(
-                    food: food,
-                    onTap: () => navigateToFoodDetails(
-                        popularFood.indexOf(food), TypeMenu.popularFood),
-                  );
-                }).toList(),
+                children: popularFood.map(
+                  (food) {
+                    return PopularFoodTile(
+                      food: food,
+                      onTap: () => navigateToFoodDetails(
+                          popularFood.indexOf(food), TypeMenu.popularFood),
+                    );
+                  },
+                ).toList(),
               ),
             ),
           )

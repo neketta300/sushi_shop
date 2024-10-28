@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:share_plus/share_plus.dart';
 import 'package:sushi_shop/models/food.dart';
 import 'package:sushi_shop/theme/colors.dart';
 
@@ -97,6 +98,8 @@ class PopularFoodTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
+    final screenHeight = MediaQuery.of(context).size.height;
     return Container(
       constraints: const BoxConstraints(minWidth: 335),
       decoration: BoxDecoration(
@@ -108,6 +111,40 @@ class PopularFoodTile extends StatelessWidget {
         color: Colors.transparent,
         child: InkWell(
           onTap: onTap,
+          onLongPress: () async {
+            showMenu(
+              menuPadding:
+                  const EdgeInsets.symmetric(vertical: 0, horizontal: 0),
+              color: const Color.fromARGB(255, 108, 48, 60),
+              context: context,
+              position: RelativeRect.fromLTRB(
+                (screenWidth / 10) * 8,
+                (screenHeight / 10) * 8.7,
+                (screenWidth / 10) * 2,
+                (screenHeight / 10) * 1.3,
+              ),
+              items: [
+                const PopupMenuItem<String>(
+                  value: 'share',
+                  child: Center(
+                    child: Text(
+                      textAlign: TextAlign.center,
+                      'Share',
+                      style: TextStyle(
+                        color: Colors.white,
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ).then((value) async {
+              if (value == 'share') {
+                await Share.share(
+                  'Checkout best sushi by Romchik',
+                );
+              }
+            });
+          },
           borderRadius: BorderRadius.circular(20),
           child: Padding(
             padding: const EdgeInsets.all(20),
