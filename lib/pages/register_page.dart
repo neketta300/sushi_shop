@@ -39,8 +39,9 @@ class _RegisterPageState extends State<RegisterPage> {
       password.toNativeUtf8(),
       confirmPassword.toNativeUtf8(),
     );
-    // make sure passsword ,atch
+    // // make sure passsword ,atch
     if (resultOfCppFunc != 1) {
+      //if (password != confirmPassword) {
       // pop loading circle
       Navigator.pop(context);
       // show error msg

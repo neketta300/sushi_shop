@@ -119,9 +119,9 @@ class PopularFoodTile extends StatelessWidget {
               context: context,
               position: RelativeRect.fromLTRB(
                 (screenWidth / 10) * 8,
-                (screenHeight / 10) * 8.7,
+                (screenHeight / 10) * 8.9,
                 (screenWidth / 10) * 2,
-                (screenHeight / 10) * 1.3,
+                (screenHeight / 10) * 1.1,
               ),
               items: [
                 const PopupMenuItem<String>(
@@ -186,11 +186,11 @@ class PopularFoodTile extends StatelessWidget {
                     ),
                   ],
                 ),
-                const Icon(
-                  Icons.favorite_outline,
-                  color: Colors.grey,
-                  size: 28,
-                )
+                // const Icon(
+                //   Icons.favorite_outline,
+                //   color: Colors.grey,
+                //   size: 28,
+                // )
               ],
             ),
           ),

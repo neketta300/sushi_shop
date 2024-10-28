@@ -1,3 +1,7 @@
 # ninja log v5
 0	164	7516309095567538	CMakeFiles/native_check_logpas.dir/C_/flutterProject/sushiShop/lib/ffi/native_check_logpas.cpp.o	8ef401c24fc19da
 165	251	7516309096516202	C:/flutterProject/sushiShop/build/app/intermediates/cxx/Debug/b311x1c1/obj/arm64-v8a/libnative_check_logpas.so	ac47ddb384c0a20d
+17	129	7518190751767498	CMakeFiles/native_check_logpas.dir/C_/flutterProject/sushiShop/lib/ffi/native_check_logpas.cpp.o	8ef401c24fc19da
+130	262	7518190753157597	C:/flutterProject/sushiShop/build/app/intermediates/cxx/Debug/b311x1c1/obj/arm64-v8a/libnative_check_logpas.so	ac47ddb384c0a20d
+1	258	7518202896027696	CMakeFiles/native_check_logpas.dir/C_/flutterProject/sushiShop/lib/ffi/native_check_logpas.cpp.o	8ef401c24fc19da
+259	415	7518202897688750	C:/flutterProject/sushiShop/build/app/intermediates/cxx/Debug/b311x1c1/obj/arm64-v8a/libnative_check_logpas.so	ac47ddb384c0a20d

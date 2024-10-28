@@ -17,29 +17,17 @@ import 'package:flutter/foundation.dart'
 class DefaultFirebaseOptions {
   static FirebaseOptions get currentPlatform {
     if (kIsWeb) {
-      throw UnsupportedError(
-        'DefaultFirebaseOptions have not been configured for web - '
-        'you can reconfigure this by running the FlutterFire CLI again.',
-      );
+      return web;
     }
     switch (defaultTargetPlatform) {
       case TargetPlatform.android:
         return android;
       case TargetPlatform.iOS:
-        throw UnsupportedError(
-          'DefaultFirebaseOptions have not been configured for ios - '
-          'you can reconfigure this by running the FlutterFire CLI again.',
-        );
+        return ios;
       case TargetPlatform.macOS:
-        throw UnsupportedError(
-          'DefaultFirebaseOptions have not been configured for macos - '
-          'you can reconfigure this by running the FlutterFire CLI again.',
-        );
+        return macos;
       case TargetPlatform.windows:
-        throw UnsupportedError(
-          'DefaultFirebaseOptions have not been configured for windows - '
-          'you can reconfigure this by running the FlutterFire CLI again.',
-        );
+        return windows;
       case TargetPlatform.linux:
         throw UnsupportedError(
           'DefaultFirebaseOptions have not been configured for linux - '
@@ -59,4 +47,41 @@ class DefaultFirebaseOptions {
     projectId: 'sushibar-949c3',
     storageBucket: 'sushibar-949c3.appspot.com',
   );
+
+  static const FirebaseOptions web = FirebaseOptions(
+    apiKey: 'AIzaSyAYQ6r64l69LgWlANoJyt3RNcpBeq2hvL8',
+    appId: '1:1068045310611:web:4193768a140ca4f6420b66',
+    messagingSenderId: '1068045310611',
+    projectId: 'sushibar-949c3',
+    authDomain: 'sushibar-949c3.firebaseapp.com',
+    storageBucket: 'sushibar-949c3.appspot.com',
+  );
+
+  static const FirebaseOptions macos = FirebaseOptions(
+    apiKey: 'AIzaSyBDo32aDVvsTnkBxT1CSA8bbe97w5RhDEY',
+    appId: '1:1068045310611:ios:479e58678d055bb7420b66',
+    messagingSenderId: '1068045310611',
+    projectId: 'sushibar-949c3',
+    storageBucket: 'sushibar-949c3.appspot.com',
+    iosBundleId: 'com.example.sushiShop',
+  );
+
+  static const FirebaseOptions ios = FirebaseOptions(
+    apiKey: 'AIzaSyBDo32aDVvsTnkBxT1CSA8bbe97w5RhDEY',
+    appId: '1:1068045310611:ios:479e58678d055bb7420b66',
+    messagingSenderId: '1068045310611',
+    projectId: 'sushibar-949c3',
+    storageBucket: 'sushibar-949c3.appspot.com',
+    iosBundleId: 'com.example.sushiShop',
+  );
+
+  static const FirebaseOptions windows = FirebaseOptions(
+    apiKey: 'AIzaSyAYQ6r64l69LgWlANoJyt3RNcpBeq2hvL8',
+    appId: '1:1068045310611:web:955cbf3dc447b470420b66',
+    messagingSenderId: '1068045310611',
+    projectId: 'sushibar-949c3',
+    authDomain: 'sushibar-949c3.firebaseapp.com',
+    storageBucket: 'sushibar-949c3.appspot.com',
+  );
+
 }

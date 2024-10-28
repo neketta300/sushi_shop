@@ -19,6 +19,8 @@ class Shop extends ChangeNotifier {
     ),
   ];
 
+  List<Food> _foundFood = [];
+
   final List<Food> _popularFoodMenu = [
     Food(
       name: "Maki",
@@ -39,8 +41,14 @@ class Shop extends ChangeNotifier {
   // customer cart
   List<Food> _cart = [];
 
+  //setter methods
+  set foundFood(List<Food> value) {
+    _foundFood = value;
+  }
+
   //getter methods
   Food get promoFood => _promoFood;
+  List<Food> get foundFood => _foundFood;
   List<Food> get foodMenu => _foodMenu;
   List<Food> get cart => _cart;
   List<Food> get popularFoodMenu => _popularFoodMenu;
