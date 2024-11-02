@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class MyTextfield extends StatelessWidget {
+class MyLogRegTextfield extends StatelessWidget {
   final TextEditingController controller;
   final String hintText;
   final bool obscurreText;
-  const MyTextfield({
+  const MyLogRegTextfield({
     super.key,
     required this.controller,
     required this.hintText,

@@ -101,7 +101,7 @@ class _RegisterPageState extends State<RegisterPage> {
           ),
 
           // nickname textfield
-          MyTextfield(
+          MyLogRegTextfield(
             controller: nicknameController,
             hintText: "Nickname",
             obscurreText: false,
@@ -111,7 +111,7 @@ class _RegisterPageState extends State<RegisterPage> {
             height: 10,
           ),
           // email textfield
-          MyTextfield(
+          MyLogRegTextfield(
             controller: emailController,
             hintText: "Email",
             obscurreText: false,
@@ -121,7 +121,7 @@ class _RegisterPageState extends State<RegisterPage> {
             height: 10,
           ),
           // password textfield
-          MyTextfield(
+          MyLogRegTextfield(
             controller: passwordController,
             hintText: "Password",
             obscurreText: true,
@@ -130,7 +130,7 @@ class _RegisterPageState extends State<RegisterPage> {
             height: 10,
           ),
           // password textfield
-          MyTextfield(
+          MyLogRegTextfield(
             controller: cofnrimPasswordController,
             hintText: "Confrim password",
             obscurreText: true,
