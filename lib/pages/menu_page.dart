@@ -203,13 +203,18 @@ class _MenuPageWidgetState extends State<MenuPageWidget> {
             height: 10,
           ),
 
-          Expanded(
-            child: ListView.builder(
-              scrollDirection: Axis.horizontal,
-              itemCount: foundFood.length,
-              itemBuilder: (context, index) => FoodMenuTile(
-                food: foundFood[index],
-                onTap: () => navigateToFoodDetails(index, TypeMenu.foundFood),
+          SizedBox(
+            width: 500,
+            height: 300,
+            child: Expanded(
+              child: ListView.builder(
+                itemExtent: 180,
+                scrollDirection: Axis.horizontal,
+                itemCount: foundFood.length,
+                itemBuilder: (context, index) => FoodMenuTile(
+                  food: foundFood[index],
+                  onTap: () => navigateToFoodDetails(index, TypeMenu.foundFood),
+                ),
               ),
             ),
           ),

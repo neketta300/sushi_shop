@@ -137,13 +137,15 @@ class PopularFoodTile extends StatelessWidget {
                   ),
                 ),
               ],
-            ).then((value) async {
-              if (value == 'share') {
-                await Share.share(
-                  'Checkout best sushi by Romchik',
-                );
-              }
-            });
+            ).then(
+              (value) async {
+                if (value == 'share') {
+                  await Share.share(
+                    'Checkout best sushi by Romchik',
+                  );
+                }
+              },
+            );
           },
           borderRadius: BorderRadius.circular(20),
           child: Padding(

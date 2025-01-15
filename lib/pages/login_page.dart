@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:lottie/lottie.dart';
 import 'package:sushi_shop/components/login_button.dart';
 import 'package:sushi_shop/components/my_textfield.dart';
 import 'package:sushi_shop/helper/helper_function.dart';
@@ -66,13 +67,15 @@ class _LoginPageState extends State<LoginPage> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           // logo
-          Center(
-            child: Icon(
-              Icons.lock_open_rounded,
-              size: 100,
-              color: Colors.grey[200],
-            ),
-          ),
+          // Center(
+          //   child: Icon(
+          //     Icons.lock_open_rounded,
+          //     size: 100,
+          //     color: Colors.grey[200],
+          //   ),
+          // ),
+
+          Lottie.asset('lib/assets/pal.json', height: 300),
 
           const SizedBox(
             height: 25,
@@ -82,14 +85,14 @@ class _LoginPageState extends State<LoginPage> {
           Text(
             "At Romchick's Sushi Bar",
             style: GoogleFonts.dmSerifDisplay(
-                fontSize: 20, color: Colors.grey[200]),
+                fontSize: 20, color: const Color(0xFFEEEEEE)),
           ),
 
           const SizedBox(
             height: 25,
           ),
           // email textfield
-          MyTextfield(
+          MyLogRegTextfield(
             controller: emailController,
             hintText: "Email",
             obscurreText: false,
@@ -99,7 +102,7 @@ class _LoginPageState extends State<LoginPage> {
             height: 10,
           ),
           // password textfield
-          MyTextfield(
+          MyLogRegTextfield(
             controller: passwordController,
             hintText: "Password",
             obscurreText: true,
